@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="storyTitles">
+        <item>1. The Two Frogs</item>
+        <item>2. The Golden Goose</item>
+        <item>3. The Lion and the Mouse</item>
+        <item>4. Cinderella</item>
+        <item>5. The Tortoise and the Hare</item>
+        <item>6. The Frog Prince</item>
+        <item>7. The Lion and the Mouse</item>
+        <item>8. The Rainbow Fish</item>
+        <item>9. The Velveteen Rabbit</item>
+        <item>10. Thumbelina</item>
+        <item>11. The Selfish Giant</item>
+        <item>12. The Boy Who Never Listened</item>
+        <item>13. The Fisherman and His Wife</item>
+        <item>14. The Bear and the Two Travelers</item>
+        <item>15. The Fox and the Grapes</item>
+        <item>16. The Ant and the Grasshopper</item>
+        <item>17. The Clever Monkey</item>
+        <item>18. The Elephant and the Blind Men</item>
+        <item>19. The Magic Mirror</item>
+        <item>20. The Mice and the Cat</item>
+        <item>21. The Wishing Tree</item>
+        <item>22. The Secret Garden</item>
+        <item>23. The Land of Lost Dreams</item>
+        <item>24. The Puzzle Kingdom</item>
+        <item>25. The Elephant and the Rope</item>
+        <item>26. The Magic Shoes</item>
+        <item>27. The Peacock and the Crane</item>
+        <item>28. The Lion\’s Share</item>
+        <item>29. The Turtle and the Hare Revisited</item>
+        <item>30. The Magic Apple Tree</item>
+        <item>31. The Magic Mirror</item>
+        <item>32. The Clever Lamb</item>
+        <item>33. The Frog and the Scorpion</item>
+        <item>34. The Boy and the Starfish</item>
+        <item>35. The Island of Kindness</item>
+        <item>36. The Stonecutter</item>
+        <item>37. The Butterfly\’s Struggle</item>
+        <item>38. The Two Frogs</item>
+        <item>39. The Golden Goose</item>
+        <item>40. The Lion and the Mouse</item>
+        <item>41. The Tortoise and the Hare</item>
+        <item>42. The Frog Prince</item>
+        <item>43. The Lion and the Mouse</item>
+        <item>44. The Selfish Giant</item>
+        <item>45. The Boy Who Never Listened</item>
+        <item>46. The Fisherman and His Wife</item>
+        <item>47. The Bear and the Two Travelers</item>
+        <item>48. The Fox and the Grapes</item>
+        <item>49. The Emperor\’s New Clothes</item>
+        <item>50. The Ant and the Grasshopper</item>
+        <item>51. The Clever Monkey</item>
+        <item>52. The Elephant and the Blind Men</item>
+        <item>53. The Magic Mirror</item>
+        <item>54. The Mice and the Cat</item>
+        <item>55. The Farmer\’s Three Sons</item>
+        <item>56. The Wishing Tree</item>
+        <item>57. The Secret Garden</item>
+        <item>58. The Land of Lost Dreams</item>
+        <item>59. The Elephant and the Rope</item>
+        <item>60. The Magic Shoes</item>
+        <item>61. The Peacock and the Crane</item>
+        <item>62. The Turtle and the Hare Revisited</item>
+        <item>63. The Wooden Bowl</item>
+        <item>64. The Magic Mirror</item>
+        <item>65. The Clever Lamb</item>
+        <item>66. The Boy and the Starfish</item>
+        <item>67. The Stone Cutter</item>
+        <item>68. The Lion and the Mouse</item>
+        <item>69. The Tortoise and the Hare</item>
+        <item>70. The Boy Who Never Listened</item>
+        <item>71. The Fisherman and His Wife</item>
+        <item>72. The Bear and the Two Travelers</item>
+        <item>73. The Ant and the Grasshopper</item>
+        <item>74. The Elephant and the Blind Men</item>
+        <item>75. The Mice and the Cat</item>
+        <item>76. The Secret Garden</item>
+        <item>77. The Land of Lost Dreams</item>
+        <item>78. The Crow and the Fox</item>
+        <item>79. The Dog and His Reflection</item>
+        <item>80. The Crow and the Pitcher</item>
+        <item>81. The Golden Touch</item>
+        <item>82. The Wise Old Owl</item>
+        <item>83. The Elephant and the Ants</item>
+        <item>84. The Boy Who Cried Wolf</item>
+        <item>85. The Little Star\’s Dream</item>
+        <item>86. The Greedy Dog</item>
+        <item>87. The Butterfly\’s Transformation</item>
+        <item>88. The Moonlight Wishes</item>
+        <item>89. The Farmer and The Well</item>
+        <item>90. Elephant and Friends</item>
+        <item>91. The Needle Tree</item>
+        <item>92. A Glass of Milk</item>
+        <item>93. The Bundle of Stick</item>
+        <item>94. The Miser and His Gold</item>
+        <item>59. The Dog at the Well</item>
+        <item>95. Controlling Anger</item>
+        <item>96. The Brahmin\’s dream</item>
+        <item>97. The Blue Jackal Story</item>
+        <item>98. The Woodcutter and The Golden Axe</item>
+        <item>99. The Miser and His Gold</item>
+        <item>100. Thief and a Little Boy Story</item>
+    </string-array>
+</resources>
