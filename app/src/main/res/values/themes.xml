@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.Stories" parent="Theme.Material3.DayNight.NoActionBar" >
+    <style name="Theme.StoriesActionBar" parent="Theme.AppCompat.DayNight" >
         <item name="colorPrimary">@color/appColor</item>
     </style>
+    <style name="Theme.StoriesNoActionBar" parent="Theme.AppCompat.DayNight.NoActionBar" >
+        <item name="colorPrimary">@color/appColor</item>
+    </style>
+
 </resources>

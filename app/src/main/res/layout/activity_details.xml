@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".DetailsActivity">
 
-    <ImageView
+   <!-- <ImageView
         android:id="@+id/imageView3"
         android:layout_width="430dp"
         android:layout_height="478dp"
@@ -27,22 +27,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/story_details" />
+        app:srcCompat="@drawable/story_details" />-->
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
+        android:id="@+id/detailsCardView"
         android:layout_width="match_parent"
         android:layout_height="600dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="32dp"
         android:visibility="visible"
-        app:cardBackgroundColor="#78BE34"
+        app:cardBackgroundColor="@color/detailsDay"
         app:cardCornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/scrollView2">
+        app:layout_constraintStart_toStartOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -128,6 +127,8 @@
 
     </androidx.cardview.widget.CardView>
 
+
+
     <TextView
         android:id="@+id/txtDetailsTitle"
         android:layout_width="wrap_content"
@@ -136,9 +137,20 @@
         android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/cardView"
+        app:layout_constraintBottom_toTopOf="@+id/detailsCardView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/btnTheme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="88dp"
+        android:clickable="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/baseline_home_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
