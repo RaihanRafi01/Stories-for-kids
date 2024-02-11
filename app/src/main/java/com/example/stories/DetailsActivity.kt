@@ -19,8 +19,6 @@ class DetailsActivity : AppCompatActivity() {
         binding = ActivityDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
         var textSize = 20f
-        //binding.detailsCardView.setCardBackgroundColor(R.color.detailsDay)
-
         val storyTitle = intent.getStringExtra("StoryTitle")
         val storyContent = intent.getStringExtra("StoryContent")
 

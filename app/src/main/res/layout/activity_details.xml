@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".DetailsActivity">
 
-   <!-- <ImageView
+    <ImageView
         android:id="@+id/imageView3"
         android:layout_width="430dp"
         android:layout_height="478dp"
@@ -27,7 +27,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/story_details" />-->
+        app:srcCompat="@drawable/story_details" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/detailsCardView"
