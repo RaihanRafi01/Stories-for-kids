@@ -49,7 +49,6 @@ class DetailsActivity : AppCompatActivity() {
                 binding.detailsCardView.setCardBackgroundColor(R.color.detailsDay)
                 check = true
             }
-
         }
         binding.btnBack.setOnClickListener {
             onBackPressed()
