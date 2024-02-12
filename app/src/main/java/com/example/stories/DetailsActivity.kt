@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.ui.res.colorResource
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.airbnb.lottie.Lottie
 import com.example.stories.databinding.ActivityDetailsBinding
 import com.example.stories.databinding.ActivityMainBinding
 
@@ -33,8 +34,21 @@ class DetailsActivity : AppCompatActivity() {
             textSize -= 2f
             binding.txtContent.setTextSize(textSize)
         }
+        var check = false
         binding.btnTheme.setOnClickListener {
-            binding.detailsCardView.setCardBackgroundColor(R.color.teal_200)
+            if(check){
+                // Night Mode
+                binding.btnTheme.resumeAnimation()
+                binding.detailsCardView.setCardBackgroundColor(R.color.detailsNight)
+                check = false
+            } else{
+                // Day Mode
+                binding.btnTheme.playAnimation()
+                binding.btnTheme.setProgress(0.5f)
+                binding.btnTheme.pauseAnimation()
+                binding.detailsCardView.setCardBackgroundColor(R.color.detailsDay)
+                check = true
+            }
 
         }
 
