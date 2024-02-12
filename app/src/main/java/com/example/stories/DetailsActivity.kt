@@ -51,6 +51,9 @@ class DetailsActivity : AppCompatActivity() {
             }
 
         }
+        binding.btnBack.setOnClickListener {
+            onBackPressed()
+        }
 
     }
 }
