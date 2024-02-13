@@ -39,14 +39,14 @@ class DetailsActivity : AppCompatActivity() {
             if(check){
                 // Night Mode
                 binding.btnTheme.resumeAnimation()
-                binding.detailsCardView.setCardBackgroundColor(R.color.detailsNight)
+                binding.detailsCardView.setCardBackgroundColor(getColor(R.color.detailsnight))
                 check = false
             } else{
                 // Day Mode
                 binding.btnTheme.playAnimation()
                 binding.btnTheme.setProgress(0.5f)
                 binding.btnTheme.pauseAnimation()
-                binding.detailsCardView.setCardBackgroundColor(R.color.detailsDay)
+                binding.detailsCardView.setCardBackgroundColor(getColor(R.color.detailsday))
                 check = true
             }
         }

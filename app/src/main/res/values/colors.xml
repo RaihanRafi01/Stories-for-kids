@@ -8,6 +8,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="appColor">#1B5156</color>
-    <color name="detailsDay">#78BE34</color>
-    <color name="detailsNight">#1C5257</color>
+    <color name="detailsday">#78BE34</color>
+    <color name="detailsnight">#1C5257</color>
 </resources>
