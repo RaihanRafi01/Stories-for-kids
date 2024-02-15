@@ -94,6 +94,17 @@
                 app:layout_constraintEnd_toEndOf="@+id/iconMinus"
                 app:layout_constraintStart_toStartOf="@+id/iconMinus"
                 app:layout_constraintTop_toTopOf="@+id/iconMinus" />
+
+            <ImageView
+                android:id="@+id/btnSpeak"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:clickable="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/speaker" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ScrollView
