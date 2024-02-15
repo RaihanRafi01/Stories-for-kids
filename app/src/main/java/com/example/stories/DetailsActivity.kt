@@ -45,7 +45,6 @@ class DetailsActivity : AppCompatActivity(),TextToSpeech.OnInitListener {
         }
 
     }
-
     private fun textSizeChange() {
         var textSize = 20f
         binding.iconPlus.setOnClickListener {
