@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#2B2D30"
     tools:context=".DetailsActivity">
 
     <ImageView
@@ -12,7 +13,7 @@
         android:layout_width="430dp"
         android:layout_height="478dp"
         android:layout_marginTop="2dp"
-        android:alpha="0.4"
+        android:alpha="0.5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,7 +24,7 @@
         android:id="@+id/imageView4"
         android:layout_width="412dp"
         android:layout_height="256dp"
-        android:alpha="0.4"
+        android:alpha="0.5"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toTopOf="@+id/imageView3"
         app:layout_constraintEnd_toEndOf="parent"
@@ -144,7 +145,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/detailsCardView"
@@ -159,10 +160,10 @@
         android:layout_marginTop="12dp"
         android:layout_marginEnd="20dp"
         android:clickable="true"
-        app:lottie_loop="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:lottie_fileName="theme_anim.json" />
+        app:lottie_fileName="theme_anim.json"
+        app:lottie_loop="false" />
 
     <ImageView
         android:id="@+id/btnBack"

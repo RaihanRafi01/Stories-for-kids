@@ -105,5 +105,4 @@ class DetailsActivity : AppCompatActivity(),TextToSpeech.OnInitListener {
         }
         super.onDestroy()
     }
-
 }
