@@ -61,20 +61,26 @@ class DetailsActivity : AppCompatActivity(),TextToSpeech.OnInitListener {
         var check = false
         binding.btnTheme.setOnClickListener {
             if(check){
-                // Night Mode
+                // Day Mode
                 binding.btnTheme.resumeAnimation()
-                binding.detailsCardView.setCardBackgroundColor(getColor(R.color.detailsnight))
+                binding.imageView3.alpha = 0.5f
+                binding.imageView4.alpha = 0.5f
+                binding.detailsCardView.setCardBackgroundColor(getColor(R.color.detailsday))
                 check = false
             } else{
-                // Day Mode
+                // Night Mode
                 binding.btnTheme.playAnimation()
                 binding.btnTheme.setProgress(0.5f)
                 binding.btnTheme.pauseAnimation()
-                binding.detailsCardView.setCardBackgroundColor(getColor(R.color.detailsday))
+                binding.imageView3.alpha = 0.2f
+                binding.imageView4.alpha = 0.2f
+                binding.detailsCardView.setCardBackgroundColor(getColor(R.color.detailsnight))
                 check = true
             }
         }
     }
+
+
 
     override fun onInit(status: Int) {
         if (status == TextToSpeech.SUCCESS) {
