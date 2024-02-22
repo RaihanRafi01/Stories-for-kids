@@ -35,4 +35,5 @@ class ItemAdapter (private val titles :Array<String>,private val contents :Array
             binding.txtTitle.text = title
         }
     }
+
 }
