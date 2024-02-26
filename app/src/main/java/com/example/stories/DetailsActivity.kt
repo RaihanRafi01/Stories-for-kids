@@ -4,16 +4,8 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.util.Log
-import android.widget.Button
-import android.widget.EditText
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.ui.res.colorResource
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.airbnb.lottie.Lottie
 import com.example.stories.databinding.ActivityDetailsBinding
-import com.example.stories.databinding.ActivityMainBinding
 import java.util.Locale
 
 class DetailsActivity : AppCompatActivity(),TextToSpeech.OnInitListener {
@@ -79,8 +71,6 @@ class DetailsActivity : AppCompatActivity(),TextToSpeech.OnInitListener {
             }
         }
     }
-
-
 
     override fun onInit(status: Int) {
         if (status == TextToSpeech.SUCCESS) {

@@ -1,5 +1,4 @@
 package com.example.stories
-
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -8,7 +7,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.stories.adapter.ItemAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
-import androidx.cardview.widget.CardView
 import com.example.stories.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -34,7 +32,6 @@ class MainActivity : AppCompatActivity() {
         binding.recylerViewStoryTitle.layoutManager = LinearLayoutManager(this)
         itemAdapter = ItemAdapter(title,storyContent,this)
         binding.recylerViewStoryTitle.adapter = itemAdapter
-
 
         binding.navView.setNavigationItemSelectedListener {
             when (it.itemId) {
@@ -73,14 +70,21 @@ class MainActivity : AppCompatActivity() {
             return true }
         when(item.itemId){
             R.id.nav_theme -> {
-                //Toast.makeText(this, "ok", Toast.LENGTH_SHORT).show()
                 onThemeChange()
             }
         }
         return super.onOptionsItemSelected(item)
     }
+    private var isNightTheme = false
     private fun onThemeChange() {
-        findViewById<CardView>(R.id.storyTitleCard).setCardBackgroundColor(getColor(R.color.detailsnight))
+        isNightTheme = !isNightTheme // Toggle theme state
+
+        val newColor = if (isNightTheme) {
+            getColor(R.color.detailsnight)
+        } else {
+            getColor(R.color.detailsday)
+        }
+        itemAdapter.setCardBackgroundColor(newColor)
     }
 }
 
