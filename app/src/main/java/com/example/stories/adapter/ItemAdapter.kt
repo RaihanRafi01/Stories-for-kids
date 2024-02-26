@@ -56,6 +56,7 @@ class ItemAdapter (private var titles :Array<String>, private val contents :Arra
                 filteredTitles.add(title)
             }
         }
+
         // Update adapter data and notify RecyclerView
         if (filteredTitles.isNotEmpty()) {
             titles = filteredTitles.toTypedArray()
