@@ -7,6 +7,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.stories.adapter.ItemAdapter
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.cardview.widget.CardView
 import com.example.stories.databinding.ActivityMainBinding
 
@@ -15,6 +16,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var toggle : ActionBarDrawerToggle
     private lateinit var title : Array<String>
     private lateinit var storyContent : Array<String>
+
+    private lateinit var itemAdapter: ItemAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +32,9 @@ class MainActivity : AppCompatActivity() {
         title = resources.getStringArray(R.array.storyTitles)
         storyContent = resources.getStringArray(R.array.storyContents)
         binding.recylerViewStoryTitle.layoutManager = LinearLayoutManager(this)
-        binding.recylerViewStoryTitle.adapter = ItemAdapter(title,storyContent,this)
+        itemAdapter = ItemAdapter(title,storyContent,this)
+        binding.recylerViewStoryTitle.adapter = itemAdapter
+
 
         binding.navView.setNavigationItemSelectedListener {
             when (it.itemId) {
@@ -40,6 +45,26 @@ class MainActivity : AppCompatActivity() {
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.nav_menu,menu)
+
+        val searchItem = menu?.findItem(R.id.nav_search)
+        val searchView = searchItem?.actionView as SearchView
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+
+                if (query != null) {
+                    itemAdapter.filterItems(query)
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText != null) {
+                    itemAdapter.filterItems(newText)
+                }
+                return true
+            }
+        })
         return true
     }
 
