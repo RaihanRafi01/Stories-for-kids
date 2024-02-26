@@ -54,7 +54,6 @@ class MainActivity : AppCompatActivity() {
                 }
                 return true
             }
-
             override fun onQueryTextChange(newText: String?): Boolean {
                 if (newText != null) {
                     itemAdapter.filterItems(newText)

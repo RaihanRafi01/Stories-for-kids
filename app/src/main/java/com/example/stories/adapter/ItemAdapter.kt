@@ -18,11 +18,9 @@ class ItemAdapter (private var titles :Array<String>, private val contents :Arra
         return TitleViewHolder(StoryTitleBinding.inflate(LayoutInflater.from(parent.context),parent,false))
 
     }
-
     override fun getItemCount(): Int {
         return titles.size
     }
-
     override fun onBindViewHolder(holder: TitleViewHolder, position: Int) {
         val title = titles[position]
         val content = contents[position]
@@ -38,7 +36,6 @@ class ItemAdapter (private var titles :Array<String>, private val contents :Arra
             activity.startActivity(iDetails)
         }
     }
-
     class TitleViewHolder(private val binding: StoryTitleBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(title: String) {
             binding.txtTitle.text = title
@@ -56,7 +53,6 @@ class ItemAdapter (private var titles :Array<String>, private val contents :Arra
                 filteredTitles.add(title)
             }
         }
-
         // Update adapter data and notify RecyclerView
         if (filteredTitles.isNotEmpty()) {
             titles = filteredTitles.toTypedArray()
