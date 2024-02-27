@@ -1,4 +1,5 @@
 package com.example.stories
+import android.app.Dialog
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -35,7 +36,12 @@ class MainActivity : AppCompatActivity() {
 
         binding.navView.setNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.nav_theme -> onThemeChange()
+                R.id.nav_home -> onThemeChange()
+                R.id.nav_info -> {
+                    val aboutDialog = Dialog(this)
+                    aboutDialog.setContentView(R.layout.about_app)
+                    aboutDialog.show()
+                }
             }
             true
         }
@@ -63,6 +69,7 @@ class MainActivity : AppCompatActivity() {
         })
         return true
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(toggle.onOptionsItemSelected(item)){
             return true }
