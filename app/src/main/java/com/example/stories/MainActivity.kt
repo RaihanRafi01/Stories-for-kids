@@ -36,8 +36,8 @@ class MainActivity : AppCompatActivity() {
         itemAdapter = ItemAdapter(title,storyContent,this)
         binding.recylerViewStoryTitle.adapter = itemAdapter
 
-        val testLink = "com.facebook.katana"
-        val appLink = "https://play.google.com/store/apps/details?id="
+        val testLink = "https://play.google.com/store/apps/details?id=com.facebook.katana"
+        val appLink = "https://play.google.com/store/apps/details?id="+packageName
 
         binding.navView.setNavigationItemSelectedListener {
             when (it.itemId) {
@@ -50,12 +50,18 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_rate -> {
                     val rateIntent = Intent(Intent.ACTION_VIEW)
                     try {
-                        rateIntent.setData(Uri.parse(appLink+packageName))
+                        rateIntent.setData(Uri.parse(appLink))
                         startActivity(rateIntent)
                     }catch (e : ActivityNotFoundException){
-                        rateIntent.setData(Uri.parse(appLink+testLink))
+                        rateIntent.setData(Uri.parse(testLink))
                         startActivity(rateIntent)
                     }
+                }
+                R.id.nav_share -> {
+                    val shareIntent = Intent(Intent.ACTION_SEND)
+                    shareIntent.type = "text/plain"
+                    shareIntent.putExtra(Intent.EXTRA_TEXT,appLink)
+                    startActivity(Intent.createChooser(shareIntent,"Share This App"))
                 }
             }
             true
