@@ -1,5 +1,8 @@
 package com.example.stories
 import android.app.Dialog
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -15,7 +18,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var toggle : ActionBarDrawerToggle
     private lateinit var title : Array<String>
     private lateinit var storyContent : Array<String>
-
     private lateinit var itemAdapter: ItemAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,6 +36,9 @@ class MainActivity : AppCompatActivity() {
         itemAdapter = ItemAdapter(title,storyContent,this)
         binding.recylerViewStoryTitle.adapter = itemAdapter
 
+        val testLink = "com.facebook.katana"
+        val appLink = "https://play.google.com/store/apps/details?id="
+
         binding.navView.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.nav_home -> onThemeChange()
@@ -41,6 +46,16 @@ class MainActivity : AppCompatActivity() {
                     val aboutDialog = Dialog(this)
                     aboutDialog.setContentView(R.layout.about_app)
                     aboutDialog.show()
+                }
+                R.id.nav_rate -> {
+                    val rateIntent = Intent(Intent.ACTION_VIEW)
+                    try {
+                        rateIntent.setData(Uri.parse(appLink+packageName))
+                        startActivity(rateIntent)
+                    }catch (e : ActivityNotFoundException){
+                        rateIntent.setData(Uri.parse(appLink+testLink))
+                        startActivity(rateIntent)
+                    }
                 }
             }
             true
