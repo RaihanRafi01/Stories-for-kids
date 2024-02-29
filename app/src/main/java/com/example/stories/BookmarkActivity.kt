@@ -1,50 +1,78 @@
 package com.example.stories
+
 import android.app.Dialog
 import android.content.ActivityNotFoundException
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.stories.adapter.ItemAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
-import com.example.stories.databinding.ActivityMainBinding
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.stories.adapter.BookmarkAdapter
+import com.example.stories.database.BookmarkViewModelFactory
+import com.example.stories.database.StoryDatabase
+import com.example.stories.database.StoryRepository
+import com.example.stories.database.StoryViewModel
+import com.example.stories.databinding.ActivityBookmarkBinding
 
-class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
+class BookmarkActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityBookmarkBinding
     private lateinit var toggle : ActionBarDrawerToggle
     private lateinit var title : Array<String>
     private lateinit var storyContent : Array<String>
-    private lateinit var itemAdapter: ItemAdapter
-
+    private lateinit var itemAdapter: BookmarkAdapter
+    lateinit var storyViewModel: StoryViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityBookmarkBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setupViewModel()
 
-        toggle = ActionBarDrawerToggle(this,binding.drawerLayout,R.string.open,R.string.close)
-        binding.drawerLayout.addDrawerListener(toggle)
+        toggle = ActionBarDrawerToggle(this,binding.drawerLayoutBookmark,R.string.open,R.string.close)
+        binding.drawerLayoutBookmark.addDrawerListener(toggle)
         toggle.syncState()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         title = resources.getStringArray(R.array.storyTitles)
         storyContent = resources.getStringArray(R.array.storyContents)
-        binding.recylerViewStoryTitle.layoutManager = LinearLayoutManager(this)
-        itemAdapter = ItemAdapter(title,storyContent,this)
-        binding.recylerViewStoryTitle.adapter = itemAdapter
+
+        storyViewModel.getAllBookmark().observe(this) { bookmarks ->
+            bookmarks?.forEach { bookmark ->
+
+                if (bookmarks != null) {
+
+                    val titles = bookmarks.map { it.title }.toTypedArray()
+                    val content = bookmarks.map { it.content }.toTypedArray()
+
+                    itemAdapter.updateItems(titles, content)
+
+                    // Update the adapter with the entire list of bookmarks
+                    itemAdapter.updateItems(bookmarks.map { it.title }.toTypedArray(), bookmarks.map { it.content }.toTypedArray())
+                }
+            }
+        }
+        // Log.e("DATA"," Title :"+a+" Content : "+title.toString())
+       // var model = storyViewModel.getAllBookmark().value
+
+        binding.recylerViewStoryTitleBookmark.layoutManager = LinearLayoutManager(this)
+        itemAdapter = BookmarkAdapter(title,storyContent,this)
+        binding.recylerViewStoryTitleBookmark.adapter = itemAdapter
 
         val testLink = "https://play.google.com/store/apps/details?id=com.facebook.katana"
         val appLink = "https://play.google.com/store/apps/details?id="+packageName
 
-        binding.navView.setNavigationItemSelectedListener {
+
+        binding.navViewBookmark.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.nav_home -> {
-                    binding.drawerLayout.closeDrawers()
+                    val mainActivityIntent = Intent(this,MainActivity::class.java)
+                    startActivity(mainActivityIntent)
                 }
                 R.id.nav_info -> {
                     val aboutDialog = Dialog(this)
@@ -68,13 +96,19 @@ class MainActivity : AppCompatActivity() {
                     startActivity(Intent.createChooser(shareIntent,"Share This App"))
                 }
                 R.id.nav_bookmark -> {
-                    val bookmarkIntent = Intent(this,BookmarkActivity::class.java)
-                    startActivity(bookmarkIntent)
+                    binding.drawerLayoutBookmark.closeDrawers()
                 }
             }
             true
         }
     }
+
+    private fun setupViewModel(){
+        val storyRepository = StoryRepository(StoryDatabase(this))
+        val viewModelProviderFactory = BookmarkViewModelFactory(application,storyRepository)
+        storyViewModel = ViewModelProvider(this,viewModelProviderFactory)[StoryViewModel::class.java]
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.nav_menu,menu)
 
@@ -98,7 +132,6 @@ class MainActivity : AppCompatActivity() {
         })
         return true
     }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(toggle.onOptionsItemSelected(item)){
             return true }
@@ -120,7 +153,5 @@ class MainActivity : AppCompatActivity() {
         }
         itemAdapter.setCardBackgroundColor(newColor)
     }
+
 }
-
-
-
