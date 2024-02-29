@@ -49,16 +49,12 @@ class BookmarkActivity : AppCompatActivity() {
 
                     val titles = bookmarks.map { it.title }.toTypedArray()
                     val content = bookmarks.map { it.content }.toTypedArray()
-
                     itemAdapter.updateItems(titles, content)
 
-                    // Update the adapter with the entire list of bookmarks
                     itemAdapter.updateItems(bookmarks.map { it.title }.toTypedArray(), bookmarks.map { it.content }.toTypedArray())
                 }
             }
         }
-        // Log.e("DATA"," Title :"+a+" Content : "+title.toString())
-       // var model = storyViewModel.getAllBookmark().value
 
         binding.recylerViewStoryTitleBookmark.layoutManager = LinearLayoutManager(this)
         itemAdapter = BookmarkAdapter(title,storyContent,this)

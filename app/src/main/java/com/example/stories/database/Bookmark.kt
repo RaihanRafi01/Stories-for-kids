@@ -3,7 +3,6 @@ package com.example.stories.database
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.versionedparcelable.ParcelField
 import kotlinx.parcelize.Parcelize
 
 @Entity(tableName = "bookmarks")
