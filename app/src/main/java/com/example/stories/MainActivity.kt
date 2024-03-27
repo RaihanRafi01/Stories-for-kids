@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         toggle = ActionBarDrawerToggle(this,binding.drawerLayout,R.string.open,R.string.close)
+        toggle.drawerArrowDrawable.color = getColor(R.color.white)
         binding.drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -36,6 +37,8 @@ class MainActivity : AppCompatActivity() {
         binding.recylerViewStoryTitle.layoutManager = LinearLayoutManager(this)
         itemAdapter = ItemAdapter(title,storyContent,this)
         binding.recylerViewStoryTitle.adapter = itemAdapter
+
+
 
         val testLink = "https://play.google.com/store/apps/details?id=com.facebook.katana"
         val appLink = "https://play.google.com/store/apps/details?id="+packageName
@@ -120,6 +123,3 @@ class MainActivity : AppCompatActivity() {
         itemAdapter.setCardBackgroundColor(newColor)
     }
 }
-
-
-

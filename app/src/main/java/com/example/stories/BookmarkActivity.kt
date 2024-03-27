@@ -35,6 +35,7 @@ class BookmarkActivity : AppCompatActivity() {
         setupViewModel()
 
         toggle = ActionBarDrawerToggle(this,binding.drawerLayoutBookmark,R.string.open,R.string.close)
+        toggle.drawerArrowDrawable.color = getColor(R.color.white)
         binding.drawerLayoutBookmark.addDrawerListener(toggle)
         toggle.syncState()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -46,12 +47,9 @@ class BookmarkActivity : AppCompatActivity() {
             bookmarks?.forEach { bookmark ->
 
                 if (bookmarks != null) {
-
                     val titles = bookmarks.map { it.title }.toTypedArray()
                     val content = bookmarks.map { it.content }.toTypedArray()
                     itemAdapter.updateItems(titles, content)
-
-                    itemAdapter.updateItems(bookmarks.map { it.title }.toTypedArray(), bookmarks.map { it.content }.toTypedArray())
                 }
             }
         }
@@ -62,7 +60,6 @@ class BookmarkActivity : AppCompatActivity() {
 
         val testLink = "https://play.google.com/store/apps/details?id=com.facebook.katana"
         val appLink = "https://play.google.com/store/apps/details?id="+packageName
-
 
         binding.navViewBookmark.setNavigationItemSelectedListener {
             when (it.itemId) {
@@ -149,5 +146,4 @@ class BookmarkActivity : AppCompatActivity() {
         }
         itemAdapter.setCardBackgroundColor(newColor)
     }
-
 }

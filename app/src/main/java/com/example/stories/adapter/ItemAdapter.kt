@@ -13,7 +13,7 @@ import com.example.stories.databinding.StoryTitleBinding
 import java.util.Locale
 
 class ItemAdapter (private var titles :Array<String>, private val contents :Array<String>, private val activity: Activity) : RecyclerView.Adapter<ItemAdapter.TitleViewHolder>() {
-    private var newColor: Int = Color.parseColor("#78BE34")
+    private var newColor: Int = Color.parseColor("#1C5257")
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TitleViewHolder {
         return TitleViewHolder(StoryTitleBinding.inflate(LayoutInflater.from(parent.context),parent,false))
     }
