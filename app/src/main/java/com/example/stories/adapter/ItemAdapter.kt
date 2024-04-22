@@ -45,9 +45,10 @@ class ItemAdapter (private var titles :Array<String>, private val contents :Arra
         this.newColor = color // Store the color in the adapter
         notifyItemRangeChanged(0, itemCount) // Notify the adapter about the change
     }
+
     fun filterItems(query: String) {
         val filteredTitles = mutableListOf<String>()
-
+        clearFilter()
         for (title in titles) {
             if (title.lowercase(Locale.getDefault()).contains(query.lowercase(Locale.getDefault()))) {
                 filteredTitles.add(title)
@@ -57,9 +58,12 @@ class ItemAdapter (private var titles :Array<String>, private val contents :Arra
         if (filteredTitles.isNotEmpty()) {
             titles = filteredTitles.toTypedArray()
             notifyDataSetChanged()
-        } else {
-            notifyDataSetChanged()
         }
+    }
+
+    fun clearFilter() {
+        titles = activity.resources.getStringArray(R.array.storyTitles) // Reset titles to original array
+        notifyDataSetChanged()
     }
 
 }
