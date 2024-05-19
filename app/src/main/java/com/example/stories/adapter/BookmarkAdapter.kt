@@ -47,9 +47,9 @@ class BookmarkAdapter (private var titles :Array<String>, private var contents :
         this.newColor = color // Store the color in the adapter
         notifyItemRangeChanged(0, itemCount) // Notify the adapter about the change
     }
-    fun filterItems(query: String) {
+    fun filterItems(query: String, previousTitles: Array<String>) {
         val filteredTitles = mutableListOf<String>()
-
+        clearFilter(previousTitles)
         for (title in titles) {
             if (title.lowercase(Locale.getDefault()).contains(query.lowercase(Locale.getDefault()))) {
                 filteredTitles.add(title)
@@ -59,9 +59,12 @@ class BookmarkAdapter (private var titles :Array<String>, private var contents :
         if (filteredTitles.isNotEmpty()) {
             titles = filteredTitles.toTypedArray()
             notifyDataSetChanged()
-        } else {
-            notifyDataSetChanged()
         }
+    }
+
+    fun clearFilter(previousTitles: Array<String>) {
+        this.titles = previousTitles // Reset titles to original array
+        notifyDataSetChanged()
     }
 
     fun updateItems(newTitles: Array<String>, newContent: Array<String>) {

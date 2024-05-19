@@ -27,6 +27,7 @@ class BookmarkActivity : AppCompatActivity() {
     private lateinit var storyContent : Array<String>
     private lateinit var itemAdapter: BookmarkAdapter
     lateinit var storyViewModel: StoryViewModel
+    private lateinit var bookmarkedTitles : Array<String>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityBookmarkBinding.inflate(layoutInflater)
@@ -47,9 +48,9 @@ class BookmarkActivity : AppCompatActivity() {
             bookmarks?.forEach { bookmark ->
 
                 if (bookmarks != null) {
-                    val titles = bookmarks.map { it.title }.toTypedArray()
+                    bookmarkedTitles = bookmarks.map { it.title }.toTypedArray()
                     val content = bookmarks.map { it.content }.toTypedArray()
-                    itemAdapter.updateItems(titles, content)
+                    itemAdapter.updateItems(bookmarkedTitles, content)
                 }
             }
         }
@@ -112,13 +113,13 @@ class BookmarkActivity : AppCompatActivity() {
             override fun onQueryTextSubmit(query: String?): Boolean {
 
                 if (query != null) {
-                    itemAdapter.filterItems(query)
+                    itemAdapter.filterItems(query,bookmarkedTitles)
                 }
                 return true
             }
             override fun onQueryTextChange(newText: String?): Boolean {
                 if (newText != null) {
-                    itemAdapter.filterItems(newText)
+                    itemAdapter.filterItems(newText,bookmarkedTitles)
                 }
                 return true
             }
