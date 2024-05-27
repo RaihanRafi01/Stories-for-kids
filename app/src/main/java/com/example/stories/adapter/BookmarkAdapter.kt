@@ -13,7 +13,7 @@ import com.example.stories.databinding.StoryTitleBinding
 import java.util.Locale
 
 class BookmarkAdapter (private var titles :Array<String>, private var contents :Array<String>, private val activity: Activity) : RecyclerView.Adapter<BookmarkAdapter.TitleViewHolder>() {
-    private var newColor: Int = Color.parseColor("#1C5257")
+    private var newColor: Int = Color.parseColor("#78BE33")
     override fun onBindViewHolder(holder: TitleViewHolder, position: Int) {
         val title = titles[position]
         val content = contents[position]

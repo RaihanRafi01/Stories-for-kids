@@ -21,7 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="This app for kids’ those want to love read stories. There are 100 moral stories. By reading this stories, kids’ will get enjoy and learn morality. \nThis app is designed by Md. Abu Daud Sarkar and Developed by Md. Raihanul Islam Rafi. \n\nThis app Copywrite  By- KRYZOTECH IT SOLUTION."/>
+            android:text="This app for kids those want to love read stories. There are 100 moral stories. By reading this stories, kids’ will get enjoy and learn morality. \nThis app is designed by Md. Abu Daud Sarkar and developed by Md. Raihanul Islam Rafi. \n\nThis app Copywrite  By- KRYZOTECH."/>
     </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
