@@ -12,13 +12,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.stories.adapter.ItemAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.lifecycle.lifecycleScope
 import com.example.stories.databinding.ActivityMainBinding
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var toggle : ActionBarDrawerToggle
-    private lateinit var title : Array<String>
-    private lateinit var storyContent : Array<String>
+    private lateinit var title : List<Story>
     private lateinit var itemAdapter: ItemAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,13 +33,13 @@ class MainActivity : AppCompatActivity() {
         toggle.syncState()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        title = resources.getStringArray(R.array.storyTitles)
-        storyContent = resources.getStringArray(R.array.storyContents)
+        //title = resources.getStringArray(R.array.storyTitles)
+        //storyContent = resources.getStringArray(R.array.storyContents)
         binding.recylerViewStoryTitle.layoutManager = LinearLayoutManager(this)
-        itemAdapter = ItemAdapter(title,storyContent,this)
-        binding.recylerViewStoryTitle.adapter = itemAdapter
+        //itemAdapter = ItemAdapter(title,storyContent,this)
+        //binding.recylerViewStoryTitle.adapter = itemAdapter
 
-
+        fetchStories()
 
         val testLink = "https://play.google.com/store/apps/details?id=com.facebook.katana"
         val appLink = "https://play.google.com/store/apps/details?id="+packageName
@@ -77,6 +78,18 @@ class MainActivity : AppCompatActivity() {
             true
         }
     }
+    private fun fetchStories() {
+        lifecycleScope.launch {
+            try {
+                val stories = apiService.getStories()
+                title = apiService.getStories()
+                itemAdapter = ItemAdapter(stories, this@MainActivity,title)
+                binding.recylerViewStoryTitle.adapter = itemAdapter
+            } catch (e: Exception) {
+                // Handle failure
+            }
+        }
+    }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.nav_menu,menu)
 
@@ -84,8 +97,8 @@ class MainActivity : AppCompatActivity() {
         val searchView = searchItem?.actionView as SearchView
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
 
+            override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query != null) {
                     itemAdapter.filterItems(query)
                 }
@@ -98,7 +111,6 @@ class MainActivity : AppCompatActivity() {
                 return true
             }
         })
-
         return true
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -122,4 +134,5 @@ class MainActivity : AppCompatActivity() {
         }
         itemAdapter.setCardBackgroundColor(newColor)
     }
+
 }

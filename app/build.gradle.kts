@@ -67,6 +67,8 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.transport.runtime)
+    implementation("junit:junit:4.12")
+    implementation(libs.androidx.junit.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -86,13 +88,12 @@ dependencies {
 
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
 
-    // Lifecycle components
-    /*implementation ("androidx.lifecycle:lifecycle-extensions:2.2.0")
-    implementation ("androidx.lifecycle:lifecycle-common-java8:2.2.0")
-    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0")
+    // api and image
+    implementation (libs.retrofit)
+    implementation (libs.converter.gson)
+    implementation (libs.glide)
+    annotationProcessor (libs.compiler)
 
-    // Kotlin components
-    implementation ("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.72")
-    api ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.5")
-    api ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.5")*/
+
+
 }

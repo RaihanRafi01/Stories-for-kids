@@ -2,38 +2,30 @@ package com.example.stories
 
 import android.app.Dialog
 import android.content.ActivityNotFoundException
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.stories.adapter.BookmarkAdapter
-import com.example.stories.database.BookmarkViewModelFactory
-import com.example.stories.database.StoryDatabase
-import com.example.stories.database.StoryRepository
-import com.example.stories.database.StoryViewModel
 import com.example.stories.databinding.ActivityBookmarkBinding
 
 class BookmarkActivity : AppCompatActivity() {
     private lateinit var binding: ActivityBookmarkBinding
     private lateinit var toggle : ActionBarDrawerToggle
-    private lateinit var title : Array<String>
-    private lateinit var storyContent : Array<String>
     private lateinit var itemAdapter: BookmarkAdapter
-    lateinit var storyViewModel: StoryViewModel
-    private lateinit var bookmarkedTitles : Array<String>
+    private lateinit var bookmarkedTitles : List<Story>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityBookmarkBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setupViewModel()
 
         toggle = ActionBarDrawerToggle(this,binding.drawerLayoutBookmark,R.string.open,R.string.close)
         toggle.drawerArrowDrawable.color = getColor(R.color.white)
@@ -41,22 +33,12 @@ class BookmarkActivity : AppCompatActivity() {
         toggle.syncState()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        title = resources.getStringArray(R.array.storyTitles)
-        storyContent = resources.getStringArray(R.array.storyContents)
-
-        storyViewModel.getAllBookmark().observe(this) { bookmarks ->
-            bookmarks?.forEach { bookmark ->
-
-                if (bookmarks != null) {
-                    bookmarkedTitles = bookmarks.map { it.title }.toTypedArray()
-                    val content = bookmarks.map { it.content }.toTypedArray()
-                    itemAdapter.updateItems(bookmarkedTitles, content)
-                }
-            }
-        }
 
         binding.recylerViewStoryTitleBookmark.layoutManager = LinearLayoutManager(this)
-        itemAdapter = BookmarkAdapter(title,storyContent,this)
+        val bookmarked = retrieveBookmarkedTitles()
+        bookmarkedTitles = retrieveBookmarkedTitles()
+        itemAdapter = BookmarkAdapter(bookmarked, this)
+        binding.recylerViewStoryTitleBookmark.layoutManager = LinearLayoutManager(this)
         binding.recylerViewStoryTitleBookmark.adapter = itemAdapter
 
         val testLink = "https://play.google.com/store/apps/details?id=com.facebook.katana"
@@ -95,12 +77,6 @@ class BookmarkActivity : AppCompatActivity() {
             }
             true
         }
-    }
-
-    private fun setupViewModel(){
-        val storyRepository = StoryRepository(StoryDatabase(this))
-        val viewModelProviderFactory = BookmarkViewModelFactory(application,storyRepository)
-        storyViewModel = ViewModelProvider(this,viewModelProviderFactory)[StoryViewModel::class.java]
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -147,4 +123,34 @@ class BookmarkActivity : AppCompatActivity() {
         }
         itemAdapter.setCardBackgroundColor(newColor)
     }
+
+
+    ////// new book mark logic
+
+    private fun retrieveBookmarkedTitles(): List<Story> {
+        val sharedPreferences = getSharedPreferences(getString(R.string.bookmark_pref_key), Context.MODE_PRIVATE)
+        val bookmarkedKeys = sharedPreferences.all.keys
+
+        // Filter keys to only include those that indicate bookmarked stories (identified by boolean values)
+        val bookmarkedTitles = bookmarkedKeys.filter { it.startsWith("bookmark_") && sharedPreferences.getBoolean(it, false) }
+            .map { it.removePrefix("bookmark_") } // Remove the prefix to get the original title
+
+        // Retrieve additional details (content and imageUrl) for each bookmarked story
+        val stories = bookmarkedTitles.mapNotNull { title ->
+            val storedTitle = sharedPreferences.getString("title_$title", null)
+            val content = sharedPreferences.getString("content_$title", null)
+            val imageUrl = sharedPreferences.getString("imageUrl_$title", null)
+
+            if (storedTitle != null && content != null && imageUrl != null) {
+                Story(storedTitle, content, imageUrl)
+            } else {
+                null
+            }
+        }
+
+        Log.e("Bookmarked Titles", stories.toString())
+        return stories
+    }
+
+
 }
