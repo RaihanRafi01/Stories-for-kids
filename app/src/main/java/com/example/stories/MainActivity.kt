@@ -101,7 +101,6 @@ class MainActivity : AppCompatActivity() {
 
         return true
     }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if(toggle.onOptionsItemSelected(item)){
             return true }
