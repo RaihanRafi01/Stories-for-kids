@@ -8,7 +8,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/storyTitleCard"
         android:layout_width="0dp"
-        android:layout_height="70dp"
+        android:layout_height="120dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
@@ -39,10 +39,20 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/storybtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"
+                android:src="@drawable/baseline_double_arrow_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/storyImg"
+                android:layout_width="75dp"
+                android:layout_height="68dp"
+                android:layout_marginEnd="92dp"
                 android:src="@drawable/baseline_double_arrow_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

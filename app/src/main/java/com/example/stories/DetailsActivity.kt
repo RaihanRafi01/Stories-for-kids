@@ -1,15 +1,11 @@
 package com.example.stories
 
+import android.content.Context
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
-import com.example.stories.database.Bookmark
-import com.example.stories.database.BookmarkViewModelFactory
-import com.example.stories.database.StoryDatabase
-import com.example.stories.database.StoryRepository
-import com.example.stories.database.StoryViewModel
+import com.bumptech.glide.Glide
 import com.example.stories.databinding.ActivityDetailsBinding
 import java.util.Locale
 
@@ -20,8 +16,12 @@ class DetailsActivity : AppCompatActivity(),TextToSpeech.OnInitListener {
     private var etSpeak: String? = null
     private lateinit var storyTitle : String
     private lateinit var storyContent : String
-    private var isBookmarked = false
-    private lateinit var storyViewModel: StoryViewModel
+    private lateinit var storyPicture : String
+    private val sharedPreferences by lazy {
+        val BOOKMARK_PREF_KEY = "501"
+        getSharedPreferences(BOOKMARK_PREF_KEY, Context.MODE_PRIVATE)
+    }
+    private var isBookmarked: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +29,7 @@ class DetailsActivity : AppCompatActivity(),TextToSpeech.OnInitListener {
         setContentView(binding.root)
 
         init()
-        setupViewModel()
+        //setupViewModel()
         textSizeChange()
         themeChange()
 
@@ -49,21 +49,18 @@ class DetailsActivity : AppCompatActivity(),TextToSpeech.OnInitListener {
     private fun init(){
         storyTitle = intent.getStringExtra("StoryTitle").toString()
         storyContent = intent.getStringExtra("StoryContent").toString()
+        storyPicture = intent.getStringExtra("StoryImage").toString()
         isBookmarked = intent.getBooleanExtra("Bookmarked",false)
 
         binding.txtContent.text = storyContent
         binding.txtDetailsTitle.text = storyTitle
+        Glide.with(binding.root.context)
+            .load(storyPicture)
+            .into(binding.imageView4)
         etSpeak = storyContent
         tts = TextToSpeech(this, this)
     }
 
-    // Init ViewModel
-
-    private fun setupViewModel(){
-        val storyRepository = StoryRepository(StoryDatabase(this))
-        val viewModelProviderFactory = BookmarkViewModelFactory(application,storyRepository)
-        storyViewModel = ViewModelProvider(this,viewModelProviderFactory)[StoryViewModel::class.java]
-    }
 
     // Text Size Change Feature
     private fun textSizeChange() {
@@ -132,28 +129,10 @@ class DetailsActivity : AppCompatActivity(),TextToSpeech.OnInitListener {
     // BOOKMARK FEATURE
 
     private fun toggleBookmark() {
-        val bookmark = Bookmark(storyTitle,storyContent,true)
-
         if (isBookmarked) {
-
-            if (bookmark != null) {
-
-                storyViewModel.deleteBookmark(bookmark)
-                // Add an observe block to update UI based on changes (optional)
-                storyViewModel.getAllBookmark().observe(this) { updatedBookmarks ->
-                    // Update UI or adapter if needed
-                }
-                Log.d("Bookmark", "Bookmark deleted: ${bookmark.title}")
-            }
-            else {
-                Log.w("Bookmark", "Cannot delete null bookmark")
-            }
-
+            removeFromBookmarks(storyTitle)
         } else {
-
-            storyViewModel.addBookmark(bookmark)
-            //storyViewModel.deleteBookmark(bookmark)
-
+            saveToBookmarks(storyTitle,storyContent,storyPicture)
         }
         isBookmarked = !isBookmarked
         updateBookmarkIcon(isBookmarked)
@@ -165,5 +144,25 @@ class DetailsActivity : AppCompatActivity(),TextToSpeech.OnInitListener {
             binding.bookmarkIcon.setImageResource(R.drawable.outline_bookmark_border_24)
         }
     }
+    private fun saveToBookmarks(title: String, content: String, imageUrl: String) {
+        val editor = sharedPreferences.edit()
+        editor.putBoolean("bookmark_$title", true) // Use a distinct key prefix for boolean
+        editor.putString("title_$title", title)
+        editor.putString("content_$title", content)
+        editor.putString("imageUrl_$title", imageUrl)
+        editor.apply()
+        Log.d("Bookmark", "Bookmark saved: $title")
+    }
+
+    private fun removeFromBookmarks(title: String) {
+        val editor = sharedPreferences.edit()
+        editor.remove("bookmark_$title") // Remove the boolean flag
+        editor.remove("title_$title") // Remove the title
+        editor.remove("content_$title") // Remove the content
+        editor.remove("imageUrl_$title") // Remove the imageUrl
+        editor.apply()
+        Log.d("Bookmark", "Bookmark removed: $title")
+    }
+
 
 }

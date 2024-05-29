@@ -7,31 +7,38 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.stories.DetailsActivity
 import com.example.stories.R
+import com.example.stories.Story
 import com.example.stories.databinding.StoryTitleBinding
 import java.util.Locale
 
-class BookmarkAdapter (private var titles :Array<String>, private var contents :Array<String>, private val activity: Activity) : RecyclerView.Adapter<BookmarkAdapter.TitleViewHolder>() {
-    private var newColor: Int = Color.parseColor("#1C5257")
+class BookmarkAdapter (private var stories: List<Story>, private val activity: Activity) : RecyclerView.Adapter<BookmarkAdapter.TitleViewHolder>() {
+    private var newColor: Int = Color.parseColor("#78BE33")
     override fun onBindViewHolder(holder: TitleViewHolder, position: Int) {
-        val title = titles[position]
-        val content = contents[position]
-        holder.bind(title)
+        val story = stories[position]
+        holder.bind(story)
+
         val cardBackground = holder.itemView.findViewById<View>(R.id.storyTitleCard)
         cardBackground.setBackgroundColor(this.newColor)
 
         holder.itemView.setOnClickListener {
-            val iDetails = Intent(activity, DetailsActivity::class.java)
-            iDetails.putExtra("StoryTitle",title)
-            iDetails.putExtra("StoryContent",content)
-            iDetails.putExtra("Bookmarked",true)
+            val iDetails = Intent(activity, DetailsActivity::class.java).apply {
+                putExtra("StoryTitle", story.title)
+                putExtra("StoryContent", story.content)
+                putExtra("StoryImage", story.imageUrl)
+                putExtra("Bookmarked",true)
+            }
             activity.startActivity(iDetails)
         }
     }
     class TitleViewHolder(private val binding: StoryTitleBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(title: String) {
-            binding.txtTitle.text = title
+        fun bind(story: Story) {
+            binding.txtTitle.text = story.title
+            Glide.with(binding.root.context)
+                .load(story.imageUrl)
+                .into(binding.storyImg)
         }
     }
 
@@ -40,37 +47,26 @@ class BookmarkAdapter (private var titles :Array<String>, private var contents :
     }
 
     override fun getItemCount(): Int {
-        return titles.size
+        return stories.size
     }
 
     fun setCardBackgroundColor(color: Int) {
         this.newColor = color // Store the color in the adapter
         notifyItemRangeChanged(0, itemCount) // Notify the adapter about the change
     }
-    fun filterItems(query: String, previousTitles: Array<String>) {
-        val filteredTitles = mutableListOf<String>()
+    fun filterItems(query: String, previousTitles: List<Story>) {
         clearFilter(previousTitles)
-        for (title in titles) {
-            if (title.lowercase(Locale.getDefault()).contains(query.lowercase(Locale.getDefault()))) {
-                filteredTitles.add(title)
-            }
+        val filteredStories = stories.filter {
+            it.title.lowercase(Locale.getDefault()).contains(query.lowercase(Locale.getDefault()))
         }
-        if (filteredTitles.isNotEmpty()) {
-            titles = filteredTitles.toTypedArray()
+        if (filteredStories.isNotEmpty()) {
+            stories = filteredStories
             notifyDataSetChanged()
         }
     }
 
-    fun clearFilter(previousTitles: Array<String>) {
-        this.titles = previousTitles // Reset titles to original array
+    fun clearFilter(previousTitles: List<Story>) {
+        this.stories = previousTitles // Reset titles to original array
         notifyDataSetChanged()
     }
-
-    fun updateItems(newTitles: Array<String>, newContent: Array<String>) {
-        this.titles = newTitles
-        this.contents = newContent
-        notifyDataSetChanged() // Notify the RecyclerView about data changes
-    }
-
-
 }
