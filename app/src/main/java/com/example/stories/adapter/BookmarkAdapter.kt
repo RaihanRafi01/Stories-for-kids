@@ -69,6 +69,4 @@ class BookmarkAdapter (private var stories: List<Story>, private val activity: A
         this.stories = previousTitles // Reset titles to original array
         notifyDataSetChanged()
     }
-
-
 }

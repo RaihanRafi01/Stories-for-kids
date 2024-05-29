@@ -5,9 +5,7 @@ import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-
 import com.bumptech.glide.Glide
-import com.example.stories.database.Bookmark
 import com.example.stories.databinding.ActivityDetailsBinding
 import java.util.Locale
 
@@ -63,13 +61,6 @@ class DetailsActivity : AppCompatActivity(),TextToSpeech.OnInitListener {
         tts = TextToSpeech(this, this)
     }
 
-    // Init ViewModel
-
-    /*private fun setupViewModel(){
-        val storyRepository = StoryRepository(StoryDatabase(this))
-        val viewModelProviderFactory = BookmarkViewModelFactory(application,storyRepository)
-        storyViewModel = ViewModelProvider(this,viewModelProviderFactory)[StoryViewModel::class.java]
-    }*/
 
     // Text Size Change Feature
     private fun textSizeChange() {
@@ -138,24 +129,10 @@ class DetailsActivity : AppCompatActivity(),TextToSpeech.OnInitListener {
     // BOOKMARK FEATURE
 
     private fun toggleBookmark() {
-        val bookmark = Bookmark(storyTitle,storyContent,true)
-
         if (isBookmarked) {
-
-            if (bookmark != null) {
-
-                removeFromBookmarks(storyTitle)
-                Log.d("Bookmark", "Bookmark deleted: ${bookmark.title}")
-            }
-            else {
-                Log.w("Bookmark", "Cannot delete null bookmark")
-            }
-
+            removeFromBookmarks(storyTitle)
         } else {
-
             saveToBookmarks(storyTitle,storyContent,storyPicture)
-            //storyViewModel.deleteBookmark(bookmark)
-
         }
         isBookmarked = !isBookmarked
         updateBookmarkIcon(isBookmarked)

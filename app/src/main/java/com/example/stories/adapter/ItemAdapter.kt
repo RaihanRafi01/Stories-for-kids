@@ -1,6 +1,5 @@
 package com.example.stories.adapter
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.view.LayoutInflater
@@ -9,10 +8,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.stories.DetailsActivity
-import com.example.stories.MainActivity
 import com.example.stories.R
 import com.example.stories.Story
-import com.example.stories.apiService
 import com.example.stories.databinding.StoryTitleBinding
 import java.util.Locale
 

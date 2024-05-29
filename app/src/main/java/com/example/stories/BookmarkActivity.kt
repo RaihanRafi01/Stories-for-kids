@@ -124,7 +124,6 @@ class BookmarkActivity : AppCompatActivity() {
         itemAdapter.setCardBackgroundColor(newColor)
     }
 
-
     ////// new book mark logic
 
     private fun retrieveBookmarkedTitles(): List<Story> {
@@ -151,6 +150,5 @@ class BookmarkActivity : AppCompatActivity() {
         Log.e("Bookmarked Titles", stories.toString())
         return stories
     }
-
 
 }

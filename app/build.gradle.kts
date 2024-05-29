@@ -81,13 +81,6 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:2.7.5")
     implementation ("com.airbnb.android:lottie:6.1.0")
 
-    // Room components
-
-    implementation ("androidx.room:room-ktx:2.6.1")
-    kapt ("androidx.room:room-compiler:2.6.1")
-
-    implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
-
     // api and image
     implementation (libs.retrofit)
     implementation (libs.converter.gson)

@@ -33,11 +33,7 @@ class MainActivity : AppCompatActivity() {
         toggle.syncState()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        //title = resources.getStringArray(R.array.storyTitles)
-        //storyContent = resources.getStringArray(R.array.storyContents)
         binding.recylerViewStoryTitle.layoutManager = LinearLayoutManager(this)
-        //itemAdapter = ItemAdapter(title,storyContent,this)
-        //binding.recylerViewStoryTitle.adapter = itemAdapter
 
         fetchStories()
 
